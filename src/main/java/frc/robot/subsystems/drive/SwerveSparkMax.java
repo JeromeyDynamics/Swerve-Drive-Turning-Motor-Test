@@ -1,15 +1,13 @@
-package frc.robot.subsystems.elevator;
+package frc.robot.subsystems.drive;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 
-import frc.robot.Constants.ElevatorConstants;
-
-public class ElevatorSparkMax implements ElevatorIO {
+public class SwerveSparkMax implements SwerveMotorIO {
     private final SparkMax motor;
 
-    public ElevatorSparkMax() {
-        motor = new SparkMax(ElevatorConstants.kElevatorMotorCanId, MotorType.kBrushless);
+    public SwerveSparkMax(int motorID) {
+        motor = new SparkMax(motorID, MotorType.kBrushless);
     }
 
     @Override
