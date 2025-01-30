@@ -22,15 +22,15 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     controller.a().toggleOnTrue(motor2.spinCounterclockwise())
-        .and(controller.leftBumper().negate()).toggleOnTrue(motor2.stopMotor());
+        .and(controller.a().negate()).toggleOnTrue(motor2.stopMotor());
     
     controller.b().toggleOnTrue(motor2.spinCounterclockwise())
-        .and(controller.leftBumper().negate()).toggleOnTrue(motor2.stopMotor());
+        .and(controller.b().negate()).toggleOnTrue(motor2.stopMotor());
     
     controller.x().toggleOnTrue(motor6.spinCounterclockwise())
-        .and(controller.leftBumper().negate()).toggleOnTrue(motor6.stopMotor());
+        .and(controller.x().negate()).toggleOnTrue(motor6.stopMotor());
     
     controller.y().toggleOnTrue(motor6.spinCounterclockwise())
-        .and(controller.leftBumper().negate()).toggleOnTrue(motor6.stopMotor());
+        .and(controller.y().negate()).toggleOnTrue(motor6.stopMotor());
   }
 }

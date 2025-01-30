@@ -4,24 +4,24 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SwerveMotor extends SubsystemBase {
-    private final SwerveSparkMax motorSparkMax;
+    private final SwerveMotorIO motor;
 
-    public SwerveMotor(SwerveSparkMax motorSparkMax) {
-        this.motorSparkMax = motorSparkMax;
+    public SwerveMotor(SwerveMotorIO motor) {
+        this.motor = motor;
     }
 
     public Command spinClockwise() {
         return run(
-            () -> motorSparkMax.setMotorSpeed(0.5));
+            () -> motor.setMotorSpeed(0.5));
     }
 
     public Command spinCounterclockwise() {
         return run(
-            () -> motorSparkMax.setMotorSpeed(-0.5));
+            () -> motor.setMotorSpeed(-0.5));
     }
 
     public Command stopMotor() {
         return run(
-            () -> motorSparkMax.stop());
+            () -> motor.stop());
     }
 }
