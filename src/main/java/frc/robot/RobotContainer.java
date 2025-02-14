@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.intake.Intake;
@@ -19,9 +20,16 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    controller.rightTrigger().whileTrue(intake.intakeOut());
-    controller.leftTrigger().whileTrue(intake.intakeIn());
+    controller.rightTrigger().whileTrue(intake.outtakeAlgae());
+    controller.leftTrigger().whileTrue(intake.intakeAlgae());
     controller.a().onTrue(intake.turntoDown());
     controller.y().onTrue(intake.turntoUp());
+    controller.b().toggleOnTrue(sequenceAlgaeIntake());
+  }
+  public Command sequenceAlgaeIntake(){
+    return intake.turntoNeutral().withTimeout(1)
+      .andThen(intake.intakeAlgae().withTimeout(1))
+      .andThen(intake.turntoUp().withTimeout(1))
+      .andThen(intake.stopIntake().withTimeout(0));
   }
 }

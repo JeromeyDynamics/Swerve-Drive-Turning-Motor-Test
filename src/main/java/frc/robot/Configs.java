@@ -64,6 +64,10 @@ public final class Configs {
         static{
         intakeConfig
                 .idleMode(IdleMode.kBrake);
+        intakeConfig.closedLoop
+                .pid(0.03, 0, 0)
+                .velocityFF(1)
+                .outputRange(-1, 1);
         pivotConfig
                 .idleMode(IdleMode.kBrake);
         pivotConfig.closedLoop

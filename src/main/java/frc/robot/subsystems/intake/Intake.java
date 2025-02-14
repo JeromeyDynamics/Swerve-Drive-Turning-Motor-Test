@@ -2,6 +2,7 @@ package frc.robot.subsystems.intake;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase{
@@ -9,6 +10,14 @@ public class Intake extends SubsystemBase{
 
     public Intake(IntakeIO intake){
         this.intake = intake;
+    }
+
+    public Command sequenceAlgae(){
+        return new ScheduleCommand(
+            turntoNeutral().withTimeout(1),
+            intakeAlgae().withTimeout(1),
+            turntoUp().withTimeout(1)
+        );
     }
 
     public Command intakeAlgae(){
@@ -25,6 +34,9 @@ public class Intake extends SubsystemBase{
 
     public Command turntoUp(){
         return run(() -> intake.setPivotPosition(IntakeConstants.kIntakeUpPosition));
+    }
+    public Command turntoNeutral(){
+        return run(() -> intake.setPivotPosition(IntakeConstants.kIntakeNeutralPosition));
     }
     public Command turntoDown(){
         return run(() -> intake.setPivotPosition(IntakeConstants.kIntakeDownPosition));
