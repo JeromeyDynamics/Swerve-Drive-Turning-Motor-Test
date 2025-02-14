@@ -6,14 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OIConstants;
-import frc.robot.subsystems.drive.SwerveMotor;
-import frc.robot.subsystems.drive.SwerveSparkMax;
+import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.intake.IntakeSparkMax;
 
 public class RobotContainer {
   CommandXboxController controller = new CommandXboxController(OIConstants.kDriverControllerPort);
-
-  private final SwerveMotor motor2 = new SwerveMotor(new SwerveSparkMax(2));
-  private final SwerveMotor motor6 = new SwerveMotor(new SwerveSparkMax(6));
+  private final Intake intake = new Intake(new IntakeSparkMax());
 
   public RobotContainer() {
     // Configure the button bindings
@@ -21,16 +19,9 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    controller.a().toggleOnTrue(motor2.spinCounterclockwise())
-        .and(controller.a().negate()).toggleOnTrue(motor2.stopMotor());
-    
-    controller.b().toggleOnTrue(motor2.spinCounterclockwise())
-        .and(controller.b().negate()).toggleOnTrue(motor2.stopMotor());
-    
-    controller.x().toggleOnTrue(motor6.spinCounterclockwise())
-        .and(controller.x().negate()).toggleOnTrue(motor6.stopMotor());
-    
-    controller.y().toggleOnTrue(motor6.spinCounterclockwise())
-        .and(controller.y().negate()).toggleOnTrue(motor6.stopMotor());
+    controller.rightTrigger().whileTrue(intake.intakeOut());
+    controller.leftTrigger().whileTrue(intake.intakeIn());
+    controller.a().onTrue(intake.turntoDown());
+    controller.y().onTrue(intake.turntoUp());
   }
 }
